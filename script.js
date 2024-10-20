@@ -80,24 +80,29 @@ function drawBoard() {
       cell.dataset.col = col;
       cell.classList.add("cell");
 
-      // Añadir eventos de mouse para la selección
+      // Añadir eventos de mouse y touch para la selección
       cell.addEventListener("mousedown", startSelection);
       cell.addEventListener("mouseenter", continueSelection);
       cell.addEventListener("mouseup", endSelection);
+
+      // Añadir eventos táctiles para dispositivos móviles
+      cell.addEventListener("touchstart", startSelectionTouch);
+      cell.addEventListener("touchmove", continueSelectionTouch);
+      cell.addEventListener("touchend", endSelectionTouch);
 
       gameBoard.appendChild(cell);
     }
   }
 }
 
-// Maneja el inicio de la selección
+// Maneja el inicio de la selección con mouse
 function startSelection(e) {
   selectedCells = [];
   e.target.classList.add("selected");
   selectedCells.push(e.target);
 }
 
-// Maneja la continuación de la selección (arrastrar el mouse)
+// Maneja la continuación de la selección con mouse
 function continueSelection(e) {
   if (e.buttons === 1) { // Solo continúa si se está presionando el botón del mouse
     if (!selectedCells.includes(e.target)) {
@@ -107,39 +112,59 @@ function continueSelection(e) {
   }
 }
 
-// Maneja el fin de la selección y verifica si se formó una palabra válida
+// Maneja el fin de la selección con mouse
 function endSelection() {
-    const selectedWord = selectedCells.map(cell => cell.textContent).join("");
-    const reversedWord = selectedCells.map(cell => cell.textContent).reverse().join("");
-  
-    if (words.includes(selectedWord) || words.includes(reversedWord)) {
-      selectedCells.forEach(cell => {
-        cell.classList.add("found");
-        // Añade un ligero retraso para que las celdas se destaquen visualmente cuando la palabra es encontrada
-        setTimeout(() => {
-          cell.classList.add("highlight");
-        }, 100);
-      });
-      foundWords.add(selectedWord);
-    }
-  
-    selectedCells.forEach(cell => cell.classList.remove("selected"));
-    selectedCells = [];
-  
-    // Marcar la palabra encontrada en la lista
-    checkFoundWords();
+  processSelection();
+}
+
+// Maneja el inicio de la selección táctil
+function startSelectionTouch(e) {
+  selectedCells = [];
+  const targetCell = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+  targetCell.classList.add("selected");
+  selectedCells.push(targetCell);
+}
+
+// Maneja la continuación de la selección táctil
+function continueSelectionTouch(e) {
+  const targetCell = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+  if (!selectedCells.includes(targetCell)) {
+    targetCell.classList.add("selected");
+    selectedCells.push(targetCell);
   }
-  
-  // Actualiza la lista de palabras encontradas
-  function checkFoundWords() {
-    const wordListItems = document.querySelectorAll("#word-list li");
-    wordListItems.forEach(item => {
-      if (foundWords.has(item.textContent)) {
-        item.classList.add("found-word");
-      }
+}
+
+// Maneja el fin de la selección táctil
+function endSelectionTouch() {
+  processSelection();
+}
+
+// Procesa la selección y verifica si una palabra ha sido encontrada
+function processSelection() {
+  const selectedWord = selectedCells.map(cell => cell.textContent).join("");
+  const reversedWord = selectedCells.map(cell => cell.textContent).reverse().join("");
+
+  if (words.includes(selectedWord) || words.includes(reversedWord)) {
+    selectedCells.forEach(cell => {
+      cell.classList.add("found");
     });
+    foundWords.add(selectedWord);
   }
-  
+
+  selectedCells.forEach(cell => cell.classList.remove("selected"));
+  selectedCells = [];
+  checkFoundWords();
+}
+
+// Actualiza la lista de palabras encontradas
+function checkFoundWords() {
+  const wordListItems = document.querySelectorAll("#word-list li");
+  wordListItems.forEach(item => {
+    if (foundWords.has(item.textContent)) {
+      item.classList.add("found-word");
+    }
+  });
+}
 
 // Inicia el juego
 document.addEventListener("DOMContentLoaded", () => {
