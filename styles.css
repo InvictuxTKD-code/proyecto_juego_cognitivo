@@ -1,62 +1,188 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+  background-color: #efc781;
+}
+/* Estilo para el título h1 */
+h1 {
+  font-family: 'Press Start 2P', sans-serif; /* Fuente retro de videojuego */
+  font-size: 3rem; /* Tamaño grande para que sea destacado */
+  color: #1c09c1; /* Color vibrante y llamativo (puedes cambiarlo a tu gusto) */
+  text-transform: uppercase; /* Mayúsculas para mayor impacto */
+  text-align: center; /* Centrar el título */
+  margin-top: 3%; /* Espacio superior */
+  letter-spacing: 4px; /* Espaciado entre letras */
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra sutil para dar profundidad */
+  animation: bounce 2s infinite; /* Animación de rebote */
+}
+
+/* Animación de rebote */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  #game-board {
-    display: grid;
-    grid-template-columns: repeat(10, 50px);
-    grid-gap: 2px;
-    margin: 20px auto;
+  50% {
+    transform: translateY(-10px); /* Movimiento hacia arriba */
   }
-  
-  #game-board div {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* Ajusta el tamaño en pantallas medianas */
+    margin-top: 5%; /* Menos espacio superior en pantallas más pequeñas */
   }
-  
-  #words-list {
-    margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem; /* Ajusta el tamaño en pantallas muy pequeñas */
+    margin-top: 3%; /* Menos espacio superior */
   }
-  
-  #words-list ul {
-    list-style-type: none;
+}
+
+#word-search-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Asegura 10 columnas de tamaño igual */
+  grid-gap: 2px; /* Espacio entre las celdas */
+  width: 420px; /* Ancho total del grid */
+  margin: 0 auto;
+}
+
+#word-search-grid div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  font-size: 24px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+/* Diseño menú Palabras a encontrar */
+#word-list {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  width: 27%; /* Ajusta el ancho a tu preferencia */
+  padding: 5px;
+  background-color: #f9f9f9; /* Fondo claro */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+  text-align: center;
+  font-family: 'Arial', sans-serif; /* Fuentes modernas */
+  font-size: 1rem; /* Tamaño de fuente adecuado */
+  color: #333; /* Color de texto oscuro */
+}
+
+/* Estilo del título h2 dentro de #word-list */
+#word-list h2 {
+  font-family: 'Press Start 2P', sans-serif; /* Fuente de estilo retro de videojuego */
+  font-size: 0.8rem; /* Tamaño adecuado para el título */
+  margin-bottom: 20px; /* Espacio debajo del título */
+  color: #0d1faa; /* Un color que destaque (azul) */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  letter-spacing: 2px; /* Espaciado entre letras para un efecto visual */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil para darle más impacto */
+}
+
+/* Estilo de las palabras */
+#word-list li {
+  list-style: none; /* Elimina los puntos de la lista */
+  margin-bottom: 5px; /* Espacio entre las palabras */
+  font-weight: bold; /* Hace las palabras más visibles */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
+
+/* Efecto al pasar el ratón */
+#word-list li:hover {
+  color: #ffd900; /* Color cuando se pasa el ratón */
+  transform: scale(1.05); /* Aumento sutil de tamaño */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  #word-list {
+    width: 80%; /* Aumenta el ancho en pantallas más pequeñas */
+    padding: 15px; /* Más espacio en los lados */
+    font-size: 0.9rem; /* Reduce ligeramente el tamaño de la fuente */
   }
-  
-  
-/* Celda seleccionada por el mouse */
+}
+
+@media (max-width: 480px) {
+  #word-list {
+    width: 90%; /* Ancho aún mayor en pantallas muy pequeñas */
+    font-size: 0.8rem; /* Reduce aún más el tamaño de la fuente */
+  }
+
+  #word-list li {
+    margin-bottom: 3px; /* Reduce el espacio entre las palabras */
+  }
+}
+
+
+
+#word-search-grid div.selected {
+  background-color: #b3d9ff;
+}
+
+#word-search-grid div.correct {
+  background-color: #81c784;
+}
+
+/* Nuevo */
+#word-search-grid {
+  display: grid;
+  grid-gap: 2px;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  user-select: none;
+}
+
 .selected {
-    background-color: yellow;
-  }
-  
-  /* Celda de una palabra encontrada */
-  .found {
-    background-color: lightgreen;
-    transition: background-color 0.5s ease, transform 0.5s ease;
-    animation: highlight 0.8s ease-out;
-  }
-  
-  /* Animación para resaltar la celda encontrada */
-  @keyframes highlight {
-    from {
-      transform: scale(1.2);
-    }
-    to {
+  background-color: yellow;
+}
+
+.correct {
+  background-color: green;
+  color: white;
+}
+
+/* Animación para las celdas seleccionadas */
+@keyframes moveWord {
+  0% {
       transform: scale(1);
-    }
+      opacity: 1;
   }
-  
-  /* Palabra encontrada en la lista */
-  .found-word {
-    text-decoration: line-through;
-    color: green;
-    font-weight: bold;
-    transition: color 0.5s ease;
+  50% {
+      transform: scale(1.2);
+      opacity: 0.8;
   }
-  
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+/* Estilo para las celdas seleccionadas cuando la palabra es correcta */
+.cell.selected.correct {
+  background-color: green;
+  color: white;
+  animation: moveWord 0.5s ease-out;
+}
+
+/* Efecto adicional para destacar las celdas cuando son correctas */
+.cell.correct {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  text-decoration: line-through;
+}

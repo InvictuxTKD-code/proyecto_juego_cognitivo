@@ -1,186 +1,220 @@
-const words = ["HTML", "CSS", "JAVASCRIPT", "WEB", "CODIGO"];
+// Cargar los sonidos
+const correctSound = new Audio('sounds/correct.wav'); // Sonido para cuando se encuentra una palabra
+const errorSound = new Audio('sounds/error.ogg'); // Sonido para cuando la selección es incorrecta
+const startSound = new Audio('sounds/start.mp3'); // Sonido al inicio del juego
+
+const words = ['HTML', 'CSS', 'JAVASCRIPT', 'WEB', 'CODIGO'];
 const gridSize = 10;
-let board = [];
+let isSelecting = false;
+let startCell = null;
 let selectedCells = [];
-let foundWords = new Set();
+let selectionDirection = null;
 
-// Inicializa el tablero con espacios vacíos
-function initializeBoard() {
-  board = Array.from({ length: gridSize }, () => Array(gridSize).fill(""));
-}
+// Crear la cuadrícula
+function createGrid() {
+    const gridContainer = document.getElementById('word-search-grid');
+    gridContainer.innerHTML = ''; // Limpiar el grid si lo regeneras
+    gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`; // Crear columnas de igual tamaño
 
-// Coloca las palabras en el tablero en posiciones aleatorias (horizontal, vertical, diagonal)
-function placeWords() {
-  words.forEach(word => {
-    let placed = false;
+    // Crear una cuadrícula vacía
+    const grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
 
-    while (!placed) {
-      const direction = Math.floor(Math.random() * 3); // 0 = horizontal, 1 = vertical, 2 = diagonal
-      const row = Math.floor(Math.random() * gridSize);
-      const col = Math.floor(Math.random() * gridSize);
+    // Colocar las palabras en el tablero
+    placeWordsOnGrid(grid);
 
-      if (canPlaceWord(word, row, col, direction)) {
-        placeWord(word, row, col, direction);
-        placed = true;
-      }
+    // Generar las celdas
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        const cell = document.createElement('div');
+        const row = Math.floor(i / gridSize);
+        const col = i % gridSize;
+        const letter = grid[row][col] || getRandomLetter();
+        cell.innerHTML = letter;
+        cell.dataset.index = `${row}-${col}`;  // Asignar fila y columna
+        cell.classList.add('cell');  // Asignar clase
+        cell.addEventListener('mousedown', handleSelectionStart);
+        cell.addEventListener('mouseover', handleSelection);
+        cell.addEventListener('mouseup', handleSelectionEnd);
+
+        // Soporte para móviles
+        cell.addEventListener('touchstart', handleSelectionStartMobile);
+        cell.addEventListener('touchmove', handleSelectionMobile);
+        cell.addEventListener('touchend', handleSelectionEndMobile);
+
+        gridContainer.appendChild(cell);
     }
-  });
 }
 
-// Verifica si una palabra puede ser colocada en una dirección específica
-function canPlaceWord(word, row, col, direction) {
-  if (direction === 0 && col + word.length > gridSize) return false; // Horizontal
-  if (direction === 1 && row + word.length > gridSize) return false; // Vertical
-  if (direction === 2 && (row + word.length > gridSize || col + word.length > gridSize)) return false; // Diagonal
-
-  for (let i = 0; i < word.length; i++) {
-    const newRow = direction === 1 || direction === 2 ? row + i : row;
-    const newCol = direction === 0 || direction === 2 ? col + i : col;
-
-    if (board[newRow][newCol] !== "" && board[newRow][newCol] !== word[i]) {
-      return false; // Ya hay una letra diferente en la posición
-    }
-  }
-
-  return true;
+function getRandomLetter() {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return letters[Math.floor(Math.random() * letters.length)];
 }
 
-// Coloca la palabra en el tablero
-function placeWord(word, row, col, direction) {
-  for (let i = 0; i < word.length; i++) {
-    const newRow = direction === 1 || direction === 2 ? row + i : row;
-    const newCol = direction === 0 || direction === 2 ? col + i : col;
-
-    board[newRow][newCol] = word[i];
-  }
-}
-
-// Rellena el tablero con letras aleatorias en las celdas vacías
-function fillEmptySpaces() {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let row = 0; row < gridSize; row++) {
-    for (let col = 0; col < gridSize; col++) {
-      if (board[row][col] === "") {
-        board[row][col] = letters[Math.floor(Math.random() * letters.length)];
-      }
-    }
-  }
-}
-
-// Dibuja el tablero en la página
-function drawBoard() {
-  const gameBoard = document.getElementById("game-board");
-  gameBoard.innerHTML = ""; // Limpia el tablero anterior
-
-  for (let row = 0; row < gridSize; row++) {
-    for (let col = 0; col < gridSize; col++) {
-      const cell = document.createElement("div");
-      cell.textContent = board[row][col];
-      cell.dataset.row = row;
-      cell.dataset.col = col;
-      cell.classList.add("cell");
-
-      // Añadir eventos de mouse y touch para la selección
-      cell.addEventListener("mousedown", startSelection);
-      cell.addEventListener("mouseenter", continueSelection);
-      cell.addEventListener("mouseup", endSelection);
-
-      // Añadir eventos táctiles para dispositivos móviles
-      cell.addEventListener("touchstart", startSelectionTouch);
-      cell.addEventListener("touchmove", continueSelectionTouch);
-      cell.addEventListener("touchend", endSelectionTouch);
-
-      gameBoard.appendChild(cell);
-    }
-  }
-}
-
-// Maneja el inicio de la selección con mouse
-function startSelection(e) {
-  selectedCells = [];
-  e.target.classList.add("selected");
-  selectedCells.push(e.target);
-}
-
-// Maneja la continuación de la selección con mouse
-function continueSelection(e) {
-  if (e.buttons === 1) { // Solo continúa si se está presionando el botón del mouse
-    if (!selectedCells.includes(e.target)) {
-      e.target.classList.add("selected");
-      selectedCells.push(e.target);
-    }
-  }
-}
-
-// Maneja el fin de la selección con mouse
-function endSelection() {
-  processSelection();
-}
-
-// Maneja el inicio de la selección táctil
-function startSelectionTouch(e) {
-  selectedCells = [];
-  const targetCell = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-  targetCell.classList.add("selected");
-  selectedCells.push(targetCell);
-}
-
-// Maneja la continuación de la selección táctil
-function continueSelectionTouch(e) {
-  const targetCell = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-  if (!selectedCells.includes(targetCell)) {
-    targetCell.classList.add("selected");
-    selectedCells.push(targetCell);
-  }
-}
-
-// Maneja el fin de la selección táctil
-function endSelectionTouch() {
-  processSelection();
-}
-
-// Procesa la selección y verifica si una palabra ha sido encontrada
-function processSelection() {
-  const selectedWord = selectedCells.map(cell => cell.textContent).join("");
-  const reversedWord = selectedCells.map(cell => cell.textContent).reverse().join("");
-
-  if (words.includes(selectedWord) || words.includes(reversedWord)) {
-    selectedCells.forEach(cell => {
-      cell.classList.add("found");
+function displayWords() {
+    const wordList = document.getElementById('words-to-find');
+    wordList.innerHTML = ''; // Limpiar la lista
+    words.forEach(word => {
+        const li = document.createElement('li');
+        li.id = `word-${word}`;  // Asignar un ID a cada palabra
+        li.textContent = word;
+        wordList.appendChild(li);
     });
-    foundWords.add(selectedWord);
-  }
-
-  selectedCells.forEach(cell => cell.classList.remove("selected"));
-  selectedCells = [];
-  checkFoundWords();
 }
 
-// Actualiza la lista de palabras encontradas
-function checkFoundWords() {
-  const wordListItems = document.querySelectorAll("#word-list li");
-  wordListItems.forEach(item => {
-    if (foundWords.has(item.textContent)) {
-      item.classList.add("found-word");
+// Colocar las palabras en la cuadrícula
+function placeWordsOnGrid(grid) {
+    words.forEach(word => {
+        let placed = false;
+        while (!placed) {
+            // Elegir una dirección aleatoria: 0-horizontal, 1-vertical, 2-diagonal
+            const direction = Math.floor(Math.random() * 3);
+            const row = Math.floor(Math.random() * gridSize);
+            const col = Math.floor(Math.random() * gridSize);
+
+            // Intentar colocar la palabra según la dirección
+            placed = tryPlaceWord(grid, word, row, col, direction);
+        }
+    });
+}
+
+// Intentar colocar la palabra en una dirección
+function tryPlaceWord(grid, word, row, col, direction) {
+    const wordLength = word.length;
+    let canPlace = true;
+
+    // Verificar si la palabra cabe en la dirección seleccionada
+    if (direction === 0) { // Horizontal
+        if (col + wordLength > gridSize) return false; // Se sale del tablero
+        for (let i = 0; i < wordLength; i++) {
+            if (grid[row][col + i] !== null) {
+                canPlace = false;
+                break;
+            }
+        }
+        if (canPlace) {
+            for (let i = 0; i < wordLength; i++) {
+                grid[row][col + i] = word[i];
+            }
+        }
+    } else if (direction === 1) { // Vertical
+        if (row + wordLength > gridSize) return false; // Se sale del tablero
+        for (let i = 0; i < wordLength; i++) {
+            if (grid[row + i][col] !== null) {
+                canPlace = false;
+                break;
+            }
+        }
+        if (canPlace) {
+            for (let i = 0; i < wordLength; i++) {
+                grid[row + i][col] = word[i];
+            }
+        }
+    } else if (direction === 2) { // Diagonal
+        if (row + wordLength > gridSize || col + wordLength > gridSize) return false; // Se sale del tablero
+        for (let i = 0; i < wordLength; i++) {
+            if (grid[row + i][col + i] !== null) {
+                canPlace = false;
+                break;
+            }
+        }
+        if (canPlace) {
+            for (let i = 0; i < wordLength; i++) {
+                grid[row + i][col + i] = word[i];
+            }
+        }
     }
-  });
+
+    return canPlace;
 }
 
-// Inicia el juego
-document.addEventListener("DOMContentLoaded", () => {
-  initializeBoard();
-  placeWords();
-  fillEmptySpaces();
-  drawBoard();
-  addWordsToList();
-});
-
-function addWordsToList() {
-  const wordList = document.getElementById("word-list");
-  words.forEach(word => {
-    const li = document.createElement("li");
-    li.textContent = word;
-    wordList.appendChild(li);
-  });
+function handleSelectionStart(e) {
+    isSelecting = true;
+    startCell = e.target;
+    selectedCells = [startCell];
+    startCell.classList.add('selected');
+    selectionDirection = null; // Resetear la dirección al inicio de la selección
 }
+
+function handleSelection(e) {
+    if (!isSelecting) return;
+
+    const currentCell = e.target;
+    const [startRow, startCol] = startCell.dataset.index.split('-').map(Number);
+    const [currentRow, currentCol] = currentCell.dataset.index.split('-').map(Number);
+
+    const deltaRow = currentRow - startRow;
+    const deltaCol = currentCol - startCol;
+
+    // Detectar la dirección de la selección al mover el ratón por primera vez
+    if (!selectionDirection) {
+        if (deltaRow === 0 && deltaCol !== 0) {
+            selectionDirection = 'horizontal';  // Moverse horizontalmente
+        } else if (deltaCol === 0 && deltaRow !== 0) {
+            selectionDirection = 'vertical';    // Moverse verticalmente
+        } else if (Math.abs(deltaRow) === Math.abs(deltaCol)) {
+            selectionDirection = 'diagonal';    // Moverse diagonalmente
+        } else {
+            return; // No es una dirección válida
+        }
+    }
+
+    // Verificar que las siguientes selecciones sigan en la misma dirección
+    if (
+        (selectionDirection === 'horizontal' && deltaRow === 0) ||
+        (selectionDirection === 'vertical' && deltaCol === 0) ||
+        (selectionDirection === 'diagonal' && Math.abs(deltaRow) === Math.abs(deltaCol))
+    ) {
+        if (!selectedCells.includes(currentCell)) {
+            selectedCells.push(currentCell);
+            currentCell.classList.add('selected');
+        }
+    }
+}
+
+function handleSelectionEnd() {
+    isSelecting = false;
+    validateSelection();
+}
+
+function validateSelection() {
+  const selectedWord = selectedCells.map(cell => cell.innerHTML).join('');
+  if (words.includes(selectedWord)) {
+      selectedCells.forEach(cell => {
+          cell.classList.add('correct');
+      });
+      document.getElementById(`word-${selectedWord}`).style.textDecoration = 'line-through';
+      document.getElementById(`word-${selectedWord}`).style.color = 'green';
+      
+      // Reproducir sonido de éxito
+      correctSound.play();
+  } else {
+      selectedCells.forEach(cell => {
+          cell.classList.remove('selected');
+      });
+
+      // Reproducir sonido de error
+      errorSound.play();
+  }
+  selectedCells = [];
+}
+
+
+// Soporte para dispositivos móviles
+function handleSelectionStartMobile(e) {
+    e.preventDefault();
+    handleSelectionStart(e.touches[0]);
+}
+
+function handleSelectionMobile(e) {
+    e.preventDefault();
+    handleSelection(e.touches[0]);
+}
+
+function handleSelectionEndMobile(e) {
+    e.preventDefault();
+    handleSelectionEnd();
+}
+
+// Inicializar el juego
+createGrid();
+displayWords();
 
