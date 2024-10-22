@@ -70,7 +70,7 @@ h1:hover {
 }
 
 img {
-    width: 30%; /* Mantiene el tamaño original */
+    width: 450px; /* Mantiene el tamaño original */
     border: 9px double teal; /* Borde color teal */
     border-radius: 5px; /* Esquinas redondeadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra suave */
