@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sopa de Letras</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="estilos_sopa_letras.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <h1>Sopa de Letras</h1>
+
+    <div class="audio">
+        <audio controls>
+            <source src="sounds/intrucciones_sopa_letras.unknown" type="audio/mpeg">
+        </audio>
+    </div>
 
     <div id="game-container">
           <div id="word-search-grid"></div>
@@ -19,11 +26,7 @@
           </div>
     </div>
 
-    <div>
-      <a href="index.html">Volver</a>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="script_sopa_letras.js"></script>
 </body>
 </html>
 
