@@ -1,0 +1,13 @@
+Instrucciones del Juego de Sopa de Letras
+
+1) Objetivo: Encuentra todas las palabras ocultas en la cuadrícula de letras.
+
+2) Cómo Jugar:
+Haz clic y arrastra el ratón o toca en la pantalla para seleccionar una palabra.
+Las palabras pueden estar en horizontal, vertical o diagonal.
+
+3) Lista de Palabras: Las palabras que debes encontrar se muestran en la lista a la derecha.
+
+4) Final del Juego: Cuando encuentres todas las palabras, se mostrará un mensaje de felicitación y podrás pedir más palabras o reiniciar el juego.
+
+¡Diviértete buscando las palabras!

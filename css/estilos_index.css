@@ -1,0 +1,98 @@
+body {
+    background: linear-gradient(135deg, #d6ebeb, #d8eeee); /* Degradado turquesa claro */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif; /* Fuente global */
+    text-align: center; /* Centraliza el contenido */
+    min-height: 100vh; /* Asegura que ocupe al menos el alto total de la ventana */
+}
+/* Estilo para el título <h1> */
+h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: darkslategray;
+    font-size: 3rem;
+    text-align: center; /* Asegura que el título esté centrado */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    border-bottom: 4px solid teal; /* Borde inferior elegante */
+    display: inline-block; /* Asegura que el borde solo esté debajo del texto */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    margin-bottom: 20px; /* Margen debajo del título */
+    transition: color 0.3s ease, transform 0.3s ease; /* Efecto de transición */
+}
+
+/* Efecto hover: cuando pasas el ratón */
+h1:hover {
+    color: teal; /* Cambia el color cuando el usuario pasa el ratón */
+    transform: scale(1.05); /* Hace que el título crezca un poco al pasar el ratón */
+}
+
+
+.integrantes {
+    font-family: 'Arial', sans-serif; /* Cambia la fuente si lo prefieres */
+    background-color: rgba(0, 128, 128, 0.1); /* Fondo turquesa claro con transparencia */
+    padding: 20px;
+    border: 2px solid teal; /* Borde color teal */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    width: 300px;
+    text-align: center;
+    margin: 0 auto; /* Centramos horizontalmente */
+}
+
+.integrantes h2 {
+    font-size: 1.5rem;
+    color: teal; /* Color del título */
+    margin-bottom: 15px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil para dar profundidad */
+    animation: bounce 2s infinite; /* Animación de rebote */
+}
+
+/* Animación de rebote */
+@keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Movimiento hacia arriba */
+    }
+  }
+
+.integrantes ul {
+    list-style-type: none; /* Elimina el estilo de lista por defecto */
+    padding-left: 0; /* Elimina padding de la lista */
+}
+
+.integrantes li {
+    font-size: 1.1rem; /* Aumenta el tamaño de la fuente */
+    margin-bottom: 8px;
+    text-align: left; /* Alinea los elementos a la izquierda dentro del div */
+    margin-left: 25%;
+    position: relative;
+}
+
+.integrantes li::before {
+    content: "✓"; /* Añade el símbolo de check */
+    color: teal; /* Color del símbolo */
+    font-weight: bold;
+    margin-right: 10px;
+    position: absolute;
+    left: -20px;
+    top: 0;
+}
+
+img {
+    width: 480px; /* Mantiene el tamaño original */
+    border: 9px double teal; /* Borde color teal */
+    border-radius: 5px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra suave */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transición suave */
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+/* Efecto hover */
+img:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    opacity: 0.9; /* Cambia la opacidad */
+}

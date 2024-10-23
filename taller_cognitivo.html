@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Cuadrícula</title>
-    <link rel="stylesheet" href="taller_cognitivo.css">
+    <link rel="stylesheet" href="css/taller_cognitivo.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-    <div id="grid"></div>
-    <button id="objective">Identificar Números</button>
-    <div id="message" class="hidden"></div>
-    <button id="newChallenge" class="hidden">Dame otro reto</button>
-    <button id="menu" class="hidden">Volver al Menú</button>
+    <h1>CUADRICULA DE OBJETIVOS</h1>
 
-    <script src="taller_cognitivo.js"></script>
+    <div class="audio" style="text-align: center;">
+        <audio controls>
+            <source src="sounds/audio_cuadricula_objetivos.unknown" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="objetivo_juego">
+        <button id="objective">Identificar Números</button>
+    </div>
+
+    <div id="grid"></div>
+    <div id="message" class="hidden"></div>
+    <button id="newChallenge" class="hidden"></button>
+    <button id="menu" class="hidden"></button>
+
+    <script src="javascript/taller_cognitivo.js"></script>
 </body>
 </html>
 
