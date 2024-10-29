@@ -135,7 +135,7 @@ function showWinMessage() {
     messageDiv.innerHTML = `
         <div class="message-content" style="background-color: rgba(0, 0, 0, 0.7); border-radius: 10px; padding: 2% 1%; text-align: center;"> 
             <h2 style="font-family: 'Courier New', Courier, monospace; color: gold; font-size: 1.4rem;">¡Felicidades, lo haz conseguido! Pero aún quedan más objetivos por completar...</h2>
-            <button id="more-words-btn" style="background-color: #28a745; color: white; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.1rem; border-radius: 5px; padding: 10px 20px; cursor: pointer;">Dame otro reto</button>
+            <button id="more-words-btn" style="background-color: #28a745; color: white; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.1rem; border-radius: 5px; padding: 10px 20px; cursor: pointer;">Dame otro objetivo</button>
             <button id="restart-btn" style="background-color: #007BFF; color: white; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1rem; border-radius: 5px; padding: 10px 20px; cursor: pointer; margin-left: 10px;">Volver al Inicio</button>
         </div>
     `;
