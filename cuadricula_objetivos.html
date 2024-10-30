@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Cuadrícula</title>
+    <link rel="stylesheet" href="css/cuadricula_objetivos.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <h1>CUADRICULA DE OBJETIVOS</h1>
+
+    <div class="audio" style="text-align: center;">
+        <audio controls>
+            <source src="sounds/audios/audio_cuadricula_objetivos.unknown" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="objetivo_juego">
+        <button id="objective">Identificar Números</button>
+    </div>
+
+    <div id="grid"></div>
+    <div id="message" class="hidden"></div>
+    <button id="newChallenge" class="hidden"></button>
+    <button id="menu" class="hidden"></button>
+
+    <script src="javascript/cuadricula_objetivos.js"></script>
+</body>
+</html>
+

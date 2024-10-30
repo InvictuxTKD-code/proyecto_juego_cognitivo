@@ -9,12 +9,24 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-    <h1>Juego de Memoria</h1>
+    <h1>JUEGO DE MEMORIA</h1>
+
+    <div class="audio">
+        <audio controls>
+            <source src="sounds/audios/audio_juego_memoria.unknown" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="button-container">
+        <button id="btn-animals">Animales</button>
+        <button id="btn-tools">Herramientas</button>
+        <button id="btn-plants">Plantas</button>
+    </div>    
 
     <div id="game-board" class="grid"></div>
-    <button id="restart-button" onclick="resetGame()">Jugar de Nuevo</button>
+    <!-- <button id="restart-button" onclick="resetGame()">Jugar de Nuevo</button> -->
     <button id="home-button" onclick="goToHome()">Volver al Inicio</button>
-    
+
     <script src="javascript/memoria.js"></script>
 </body>
 </html>

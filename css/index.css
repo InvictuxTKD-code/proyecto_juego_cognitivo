@@ -6,7 +6,7 @@ body {
     text-align: center; /* Centraliza el contenido */
     min-height: 100vh; /* Asegura que ocupe al menos el alto total de la ventana */
 }
-/* Estilo para el título <h1> */
+
 h1 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: darkslategray;

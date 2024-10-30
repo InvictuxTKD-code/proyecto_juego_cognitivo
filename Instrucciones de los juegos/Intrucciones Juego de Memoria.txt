@@ -1,15 +1,16 @@
-Objetivo del Juego : El objetivo es encontrar y emparejar todas las cartas idénticas.
+
+
+Intrucciones juego de memoria
+El objetivo es encontrar y emparejar todas las cartas idénticas.
 
 Cómo Jugar :
-
 Haz clic en una carta para revelarla.
 Luego, selecciona otra carta para ver si coincide con la primera.
-Si las dos cartas coinciden, se mantendrán volteadas.
-Si no coinciden, ambas cartas se darán vuelta nuevamente después de un momento.
+Si las dos cartas coinciden, se marcaran correctamente
+Si no coinciden, se volveran a volter 
 
 Botones :
-Jugar de Nuevo : Puedes hacer clic en este botón para reiniciar el juego.
-Ir al Inicio : Este botón te llevará a la página principal.
+abajo de las cartas estara el boton "Ir al Inicio" Este botón te llevará a la página principal.
 
 Consejos :
 Trata de recordar la posición de las cartas que has visto para encontrar rápidamente los pares.

@@ -1,22 +1,15 @@
 Instrucciones del juego Cuadricula de objetivos
 
-Objetivo del juego
-Tu tarea es encontrar y resaltar las letras y números dentro de la cuadrícula. Cada vez que encuentres un elemento correcto, ¡será marcado en verde! Pero ten cuidado, si seleccionas el elemento incorrecto, se marcará en rojo y escucharás un sonido de error.
+Objetivo del juego:
+Es encontrar las letras y números dentro de la cuadrícula. 
+Cada vez que encuentres un elemento correcto, ¡será marcado en verde! 
+si seleccionas un elemento incorrecto, se marcará en rojo.
 
-Cómo Jugar
-Al comenzar, Habra un mensaje con un objetivo arriba de la cuadricula. Este te indicará qué tipo de elementos debes buscar en la cuadrícula.
+Cómo Jugar:
+Al comenzar, Habra un mensaje con un objetivo arriba de la cuadricula. 
+Este te indicará qué tipo de elementos debes buscar en la cuadrícula.
 
-Seleccionar elementos : Haz clic en las casillas de la cuadrícula para seleccionar letras o números.
-
-Si seleccionas un elemento correcto:
-La casilla se marcará en verde .
-Escucharás un sonido de éxito.
-Si seleccionas un elemento incorrecto:
-La casilla se marcará en rojo .
-y Escucharás un sonido de error.
-
-Final del Juego : Cuando se completa el objetivo, aparecerá un mensaje en la pantalla:
-
-Con 2 botones "Dame más palabras" para empezar un nuevo desafío o "Volver al Inicio" para regresar al menú principal.
+Cuando se completa el objetivo, aparecerá un mensaje en la pantalla:
+Con 2 botones uno dira "Dame más palabras" para empezar un nuevo desafío o "Volver al Inicio" para regresar al menú principal.
 
 Consejos: concentrate y diviértete.
