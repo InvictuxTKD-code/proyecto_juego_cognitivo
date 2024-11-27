@@ -31,7 +31,7 @@ h1:hover {
 .integrantes {
     font-family: 'Arial', sans-serif; /* Cambia la fuente si lo prefieres */
     background-color: rgba(0, 128, 128, 0.1); /* Fondo turquesa claro con transparencia */
-    padding: 20px 25px 0px 25px;
+    padding: 10px 25px 10px 25px;
     border: 2px solid teal; /* Borde color teal */
     border-radius: 15px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
@@ -83,7 +83,7 @@ h1:hover {
 }
 
 .integrantes img {
-    width: 150px;
+    width: 170px;
     border: none;
     margin: 10px 0px 5px 0px;
     box-shadow: none;
@@ -105,4 +105,88 @@ img {
 img:hover {
     transform: scale(1.05); /* Aumenta ligeramente el tamaño */
     opacity: 0.9; /* Cambia la opacidad */
+}
+
+
+/* Valoraciones */
+#valoraciones {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado */
+#valoraciones h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Texto descriptivo */
+#valoraciones p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Estrellas */
+.estrellas {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.estrella {
+    font-size: 3rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.estrella:hover,
+.estrella.selected {
+    color: #ffc107;
+    transform: scale(1.1);
+}
+
+.estrella:hover ~ .estrella {
+    color: #ddd;
+}
+
+/* Área de texto */
+textarea {
+    width: 90%;
+    height: 100px;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Botón */
+button {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #e6a800;
+    transform: scale(1.05);
 }

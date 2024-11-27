@@ -8,36 +8,41 @@
 </head>
 <body>
     <h1>Mente Fuerte</h1>
-
+    <!-- Logo principal -->
     <div class="integrantes">
-        <h2>INTEGRANTES:</h2>
-        <ul>
-            <li>Bárbara Góngora</li>
-            <li>Dafnna Carrasco</li>
-            <li>Rena Huenuanca</li>
-            <li>Camila Muñoz</li>
-            <li>Carla Betancur</li>
-            <li>Nayeli Zambrano</li>
-            <li>Carolina Muñoz</li>
-            <li>Nicol González</li>
-            <img src="imagenes/logo_mente_fuerte.png" alt="">
-        </ul>
+        <img src="imagenes/logo_mente_fuerte.png" alt="">
     </div>
 
-    <a href="sopa_de_letras.html">
-        <img src="imagenes/img_sopa_letras.png" alt="Sopa de Letras">
-    </a>
-
-    <div style="text-align: center;">
-        <a href="cuadricula_objetivos.html">
-            <img src="imagenes/img_cuadricula_objetivos.png" alt="Cuadricula de Objetivos">
+    <!-- Juegos -->
+        <a href="sopa_de_letras.html">
+            <img src="imagenes/img_sopa_letras.png" alt="Sopa de Letras">
         </a>
-    </div>
 
-    <div style="text-align: center;">
-        <a href="memoria.html">
-            <img src="imagenes/juego_memoria.png" alt="Juego de Memoria">
-        </a>
-    </div>
+        <div style="text-align: center;">
+            <a href="cuadricula_objetivos.html">
+                <img src="imagenes/img_cuadricula_objetivos.png" alt="Cuadricula de Objetivos">
+            </a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="memoria.html">
+                <img src="imagenes/juego_memoria.png" alt="Juego de Memoria">
+            </a>
+        </div>
+    <!-- Valoraciones -->
+        <section id="valoraciones">
+            <h2>¡Tu opinión nos importa!</h2>
+            <p>Valora tu experiencia con nuestros juegos:</p>
+            <div class="estrellas">
+                <span class="estrella" data-valor="1">&#9733;</span>
+                <span class="estrella" data-valor="2">&#9733;</span>
+                <span class="estrella" data-valor="3">&#9733;</span>
+                <span class="estrella" data-valor="4">&#9733;</span>
+                <span class="estrella" data-valor="5">&#9733;</span>
+            </div>
+            <textarea id="comentario" placeholder="Escribe aquí tu comentario"></textarea>
+            <button id="enviarValoracion">Enviar valoración</button>
+        </section>
+    <script src="javascript/index.js"></script>
 </body>
 </html>
